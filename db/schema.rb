@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326035926) do
+ActiveRecord::Schema.define(version: 20170326045946) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170326035926) do
   add_index "enrrolments", ["Team_id"], name: "index_enrrolments_on_Team_id"
 
   create_table "students", force: :cascade do |t|
-    t.integer  "cpf"
+    t.string   "cpf"
     t.string   "email"
     t.string   "phone"
     t.date     "date_birth"
