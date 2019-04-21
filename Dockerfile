@@ -1,27 +1,33 @@
-FROM ruby:2.3
+FROM ruby:2.6-alpine AS build
 
-RUN apt-get update -qq && apt-get install -y build-essential
+RUN apk add --no-cache build-base busybox \
+  ca-certificates curl git gnupg1 graphicsmagick \
+  libffi-dev libsodium-dev nodejs openssh-client \
+  postgresql-dev rsync
 
-# for postgres
-RUN apt-get install -y libpq-dev
+RUN mkdir -p /app
+WORKDIR /app
 
-# for nokogiri
-RUN apt-get install -y libxml2-dev libxslt1-dev
+COPY Gemfile /app/
 
-# for capybara-webkit
-RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
+RUN bundle install -j4 --retry 3 && \
+  rm -rf /usr/local/bundle/bundler/gems/*/.git \
+  /usr/local/bundle/cache/
 
-# for a JS runtime
-RUN apt-get install -y nodejs
+COPY . /app/
 
-ENV APP_HOME /myapp
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
+FROM ruby:2.6-alpine
+
+RUN apk add --no-cache busybox ca-certificates curl \
+  gnupg1 graphicsmagick libsodium-dev \
+  nodejs postgresql-dev rsync tzdata
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY --from=build /usr/local/bundle/ /usr/local/bundle/
+COPY --from=build /app/ /app/
 
 EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
 
-ADD Gemfile* $APP_HOME/
-RUN bundle install
-
-ADD . $APP_HOME
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
