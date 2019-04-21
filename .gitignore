@@ -14,4 +14,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
-/tmp
+/tmp/*
+!/tmp/.keep
+
+# Ignore uploaded files in development
+/storage/*
+
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
