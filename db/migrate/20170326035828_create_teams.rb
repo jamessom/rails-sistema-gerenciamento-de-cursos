@@ -1,8 +1,8 @@
-class CreateTeams < ActiveRecord::Migration
+class CreateTeams < ActiveRecord::Migration[5.2]
   def change
     create_table :teams do |t|
-      t.references :Trainer, index: true, foreign_key: true
-      t.references :Course, index: true, foreign_key: true
+      t.references :trainers, index: true, foreign_key: true
+      t.references :courses, index: true, foreign_key: true
       t.datetime :initial_date
       t.datetime :end_date
       t.integer :workload
