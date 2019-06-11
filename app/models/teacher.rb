@@ -1,3 +1,3 @@
 class Teachers < ApplicationRecord
-    belongs_to :Employer
+    belongs_to :employer
 end

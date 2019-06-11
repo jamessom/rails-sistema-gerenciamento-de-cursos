@@ -44,6 +44,6 @@ def update
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:Employer_id, :hour_value, :certificates)
+      params.require(:teacher).permit(:employer_id, :hour_value, :certificates)
     end
 end
