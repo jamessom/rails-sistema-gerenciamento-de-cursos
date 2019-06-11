@@ -17,6 +17,12 @@ chdir APP_ROOT do
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
 
+  puts "\n== Create database =="
+  system! 'bin/rails db:create'
+  
+  puts "\n== Create database =="
+  system! 'bin/rails db:migrate'
+
   puts "\n== Starting application server =="
   system! 'bin/rails s --port 3000 -b 0.0.0.0'
 end
