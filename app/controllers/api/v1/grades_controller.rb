@@ -44,6 +44,6 @@ class Api::V1::GradesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grade_params
-      params.require(:grade).permit(:Trainer_id, :Course_id, :initial_date, :end_date, :workload)
+      params.require(:grade).permit(:Teacher_id, :Course_id, :initial_date, :end_date)
     end
 end

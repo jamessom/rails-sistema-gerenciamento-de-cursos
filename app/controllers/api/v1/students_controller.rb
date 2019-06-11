@@ -44,6 +44,6 @@ class Api::V1::StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:cpf, :email, :phone, :date_birth)
+      params.require(:student).permit(:name, :cpf, :email, :phone, :date_birth)
     end
 end

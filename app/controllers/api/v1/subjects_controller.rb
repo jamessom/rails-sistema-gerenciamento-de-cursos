@@ -44,6 +44,6 @@ class Api::V1::SubjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
-      params.require(:subject).permit(:name, :requiriment, :workload, :price)
+      params.require(:subject).permit(:name, :requirement, :price, :workload)
     end
 end
