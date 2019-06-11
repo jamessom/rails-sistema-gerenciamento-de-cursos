@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_03_26_045946) do
+ActiveRecord::Schema.define(version: 2019_06_11_154350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 2017_03_26_045946) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "enrrolments", force: :cascade do |t|
-    t.datetime "date_enrrolment"
+  create_table "enrollments", force: :cascade do |t|
+    t.datetime "date_enrollment"
     t.bigint "students_id"
     t.bigint "teams_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["students_id"], name: "index_enrrolments_on_students_id"
-    t.index ["teams_id"], name: "index_enrrolments_on_teams_id"
+    t.index ["students_id"], name: "index_enrollments_on_students_id"
+    t.index ["teams_id"], name: "index_enrollments_on_teams_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2017_03_26_045946) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "enrrolments", "students", column: "students_id"
-  add_foreign_key "enrrolments", "teams", column: "teams_id"
+  add_foreign_key "enrollments", "students", column: "students_id"
+  add_foreign_key "enrollments", "teams", column: "teams_id"
   add_foreign_key "teams", "courses", column: "courses_id"
   add_foreign_key "teams", "trainers", column: "trainers_id"
 end
