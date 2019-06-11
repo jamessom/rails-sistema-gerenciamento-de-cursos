@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_162550) do
+ActiveRecord::Schema.define(version: 2019_06_11_171327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.date "date_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "enrollments", force: :cascade do |t|
     t.datetime "date_enrollment"
@@ -26,18 +35,19 @@ ActiveRecord::Schema.define(version: 2019_06_11_162550) do
   end
 
   create_table "grades", force: :cascade do |t|
-    t.bigint "trainers_id"
+    t.bigint "teachers_id"
     t.bigint "subjects_id"
     t.datetime "initial_date"
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subjects_id"], name: "index_grades_on_subjects_id"
-    t.index ["trainers_id"], name: "index_grades_on_trainers_id"
+    t.index ["teachers_id"], name: "index_grades_on_teachers_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "cpf"
+    t.string "name"
     t.string "email"
     t.string "phone"
     t.date "date_birth"
@@ -47,24 +57,25 @@ ActiveRecord::Schema.define(version: 2019_06_11_162550) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
-    t.string "requiriment"
+    t.string "requirement"
     t.integer "workload"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "trainers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+  create_table "teachers", force: :cascade do |t|
     t.integer "hour_value"
     t.string "certificates"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employer_id"
+    t.index ["employer_id"], name: "index_teachers_on_employer_id"
   end
 
   add_foreign_key "enrollments", "grades", column: "grades_id"
   add_foreign_key "enrollments", "students", column: "students_id"
   add_foreign_key "grades", "subjects", column: "subjects_id"
-  add_foreign_key "grades", "trainers", column: "trainers_id"
+  add_foreign_key "grades", "teachers", column: "teachers_id"
+  add_foreign_key "teachers", "employers"
 end
