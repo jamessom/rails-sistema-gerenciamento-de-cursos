@@ -1,4 +1,4 @@
 class Enrollment < ApplicationRecord
-  belongs_to :Student
-  belongs_to :Grade
+  belongs_to :student
+  belongs_to :grade
 end

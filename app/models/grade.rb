@@ -1,4 +1,4 @@
 class Grade < ApplicationRecord
-  belongs_to :Trainer
-  belongs_to :Subject
+  belongs_to :teacher
+  belongs_to :subject
 end
