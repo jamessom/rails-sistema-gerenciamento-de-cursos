@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_161602) do
+ActiveRecord::Schema.define(version: 2019_06_11_162550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "courses", force: :cascade do |t|
-    t.string "name"
-    t.string "requiriment"
-    t.integer "workload"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "enrollments", force: :cascade do |t|
     t.datetime "date_enrollment"
@@ -36,12 +27,12 @@ ActiveRecord::Schema.define(version: 2019_06_11_161602) do
 
   create_table "grades", force: :cascade do |t|
     t.bigint "trainers_id"
-    t.bigint "courses_id"
+    t.bigint "subjects_id"
     t.datetime "initial_date"
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["courses_id"], name: "index_grades_on_courses_id"
+    t.index ["subjects_id"], name: "index_grades_on_subjects_id"
     t.index ["trainers_id"], name: "index_grades_on_trainers_id"
   end
 
@@ -50,6 +41,15 @@ ActiveRecord::Schema.define(version: 2019_06_11_161602) do
     t.string "email"
     t.string "phone"
     t.date "date_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.string "requiriment"
+    t.integer "workload"
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,6 +65,6 @@ ActiveRecord::Schema.define(version: 2019_06_11_161602) do
 
   add_foreign_key "enrollments", "grades", column: "grades_id"
   add_foreign_key "enrollments", "students", column: "students_id"
-  add_foreign_key "grades", "courses", column: "courses_id"
+  add_foreign_key "grades", "subjects", column: "subjects_id"
   add_foreign_key "grades", "trainers", column: "trainers_id"
 end
