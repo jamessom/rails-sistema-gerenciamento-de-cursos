@@ -44,6 +44,6 @@ class Api::V1::EnrollmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def enrollment_params
-      params.require(:enrollment).permit(:date_enrollment, :Student_id, :Team_id)
+      params.require(:enrollment).permit(:date_enrollment, :Student_id, :Teacher_id)
     end
 end
