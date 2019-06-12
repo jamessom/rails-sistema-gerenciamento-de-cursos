@@ -34,6 +34,7 @@ group :development, :test do
   gem 'faker', '~> 1.9', '>= 1.9.3'
   gem 'colorize', '~> 0.8.1'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
 end
 
 group :development do
