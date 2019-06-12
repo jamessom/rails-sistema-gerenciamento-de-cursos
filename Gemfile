@@ -35,6 +35,7 @@ group :development, :test do
   gem 'colorize', '~> 0.8.1'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
+  gem 'database_cleaner', '~> 1.7'
 end
 
 group :development do
