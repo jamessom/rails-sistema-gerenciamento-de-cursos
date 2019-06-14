@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine AS build
+FROM ruby:2.6-alpine
 
 ENV APP_HOME /app
 ENV BUNDLE_PATH ${APP_HOME}/.gems
@@ -17,13 +17,6 @@ RUN bundle install --jobs=10 --retry=3 --path=${BUNDLE_PATH} --clean && \
   /usr/local/bundle/cache/
 
 COPY . ${APP_HOME}
-
-FROM ruby:2.6-alpine
-
-RUN apk --no-cache add build-base nodejs postgresql-dev git tzdata
-
-COPY --from=build /app/.gems/ ${BUNDLE_PATH}/
-COPY --from=build /app/ ${APP_HOME}/
 
 EXPOSE 3000
 
