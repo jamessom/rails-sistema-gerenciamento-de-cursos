@@ -1,3 +1,3 @@
 # Simple Course Management System
 
-![er-model](/docs/ER-model.png?raw=true)
+![er-model](/docs/schema_db_v3.png?raw=true)

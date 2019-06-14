@@ -26,23 +26,23 @@ ActiveRecord::Schema.define(version: 2019_06_11_171327) do
 
   create_table "enrollments", force: :cascade do |t|
     t.datetime "date_enrollment"
-    t.bigint "students_id"
-    t.bigint "grades_id"
+    t.bigint "student_id"
+    t.bigint "grade_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["grades_id"], name: "index_enrollments_on_grades_id"
-    t.index ["students_id"], name: "index_enrollments_on_students_id"
+    t.index ["grade_id"], name: "index_enrollments_on_grade_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "grades", force: :cascade do |t|
-    t.bigint "teachers_id"
-    t.bigint "subjects_id"
+    t.bigint "teacher_id"
+    t.bigint "subject_id"
     t.datetime "initial_date"
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subjects_id"], name: "index_grades_on_subjects_id"
-    t.index ["teachers_id"], name: "index_grades_on_teachers_id"
+    t.index ["subject_id"], name: "index_grades_on_subject_id"
+    t.index ["teacher_id"], name: "index_grades_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 2019_06_11_171327) do
     t.index ["employer_id"], name: "index_teachers_on_employer_id"
   end
 
-  add_foreign_key "enrollments", "grades", column: "grades_id"
-  add_foreign_key "enrollments", "students", column: "students_id"
-  add_foreign_key "grades", "subjects", column: "subjects_id"
-  add_foreign_key "grades", "teachers", column: "teachers_id"
+  add_foreign_key "enrollments", "grades"
+  add_foreign_key "enrollments", "students"
+  add_foreign_key "grades", "subjects"
+  add_foreign_key "grades", "teachers"
   add_foreign_key "teachers", "employers"
 end
