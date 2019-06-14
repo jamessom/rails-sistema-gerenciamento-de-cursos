@@ -10,6 +10,7 @@ services:
       driver: "none"
 
   scms_web:
+    image: scms_web:latest
     container_name: scms_web
     build: .
     command: ruby bin/start
