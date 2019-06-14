@@ -1,32 +1,29 @@
 FROM ruby:2.6-alpine AS build
 
-RUN apk add --no-cache build-base busybox \
-  ca-certificates curl git gnupg1 graphicsmagick \
-  libffi-dev libsodium-dev nodejs openssh-client \
-  postgresql-dev rsync
+ENV APP_HOME /app
+ENV BUNDLE_PATH ${APP_HOME}/.gems
 
-RUN mkdir -p /app
-WORKDIR /app
+RUN apk update && apk upgrade &&\
+  apk --no-cache add build-base nodejs postgresql-dev git tzdata &&\
+  rm -rf /var/cache/apk/*
 
-COPY Gemfile /app/
+RUN mkdir -p ${APP_HOME}
+WORKDIR ${APP_HOME}
 
-RUN bundle install -j4 --retry 3 && \
+COPY Gemfile* ${APP_HOME}/
+
+RUN bundle install --jobs=10 --retry=3 --path=${BUNDLE_PATH} --clean && \
   rm -rf /usr/local/bundle/bundler/gems/*/.git \
   /usr/local/bundle/cache/
 
-COPY . /app/
+COPY . ${APP_HOME}
 
 FROM ruby:2.6-alpine
 
-RUN apk add --no-cache busybox ca-certificates curl \
-  gnupg1 graphicsmagick libsodium-dev \
-  nodejs postgresql-dev rsync tzdata
+RUN apk --no-cache add build-base nodejs postgresql-dev git tzdata
 
-RUN mkdir -p /app
-WORKDIR /app
-
-COPY --from=build /usr/local/bundle/ /usr/local/bundle/
-COPY --from=build /app/ /app/
+COPY --from=build /app/.gems/ ${BUNDLE_PATH}/
+COPY --from=build /app/ ${APP_HOME}/
 
 EXPOSE 3000
 
