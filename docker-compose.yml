@@ -5,18 +5,25 @@ services:
     container_name: scms_database
     image: postgres:9.5-alpine
     ports: [ "15432:5432" ]
+    networks: [ scms-net ]
     logging:
       driver: "none"
-    networks: [ scms-net ]
 
   scms_web:
+    image: scms_web:latest
     container_name: scms_web
     build: .
     command: ruby bin/start
-    volumes: [ ".:/app" ]
+    volumes: [ ".:/app", ".gems:/.gems" ]
     ports: [ "3001:3000" ]
     depends_on: [ scms_database ]
+    links: [ scms_database ]
     networks: [ scms-net ]
+    environment:
+      RAILS_ENV: 'development'
+
+volumes:
+  .gems:
 
 networks: 
   scms-net:
