@@ -1,4 +1,4 @@
-class Api::V1::EnrollmentsController < ApplicationController
+class Api::V1::EnrollmentsController < Api::V1::ApiController
   before_action :set_enrollment, only: [:show, :update, :destroy]
 
   def index
@@ -45,5 +45,9 @@ class Api::V1::EnrollmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def enrollment_params
       params.require(:enrollment).permit(:date_enrollment, :student_id, :teacher_id)
+    end
+
+    def serializer
+      EnrollmentSerializer
     end
 end

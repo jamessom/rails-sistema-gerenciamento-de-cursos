@@ -1,4 +1,4 @@
-class Api::V1::EmployersController < ApplicationController
+class Api::V1::EmployersController < Api::V1::ApiController
     before_action :set_employer, only: [:show, :update, :destroy]
   
     def index
@@ -45,5 +45,9 @@ class Api::V1::EmployersController < ApplicationController
       # Never trust parameters from the scary internet, only allow the white list through.
       def employer_params
         params.require(:employer).permit(:name, :email, :phone, :date_birth)
+      end
+
+      def serializer
+        EmployerSerializer
       end
   end

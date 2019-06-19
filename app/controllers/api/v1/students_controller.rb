@@ -1,4 +1,4 @@
-class Api::V1::StudentsController < ApplicationController
+class Api::V1::StudentsController < Api::V1::ApiController
   before_action :set_student, only: [:show, :update, :destroy]
 
   def index
@@ -45,5 +45,9 @@ class Api::V1::StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:name, :cpf, :email, :phone, :date_birth)
+    end
+
+    def serializer
+      StudentsSerializer
     end
 end

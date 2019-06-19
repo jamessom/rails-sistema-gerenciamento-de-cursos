@@ -1,4 +1,4 @@
-class Api::V1::TeachersController < ApplicationController
+class Api::V1::TeachersController < Api::V1::ApiController
   before_action :set_teacher, only: [:show, :update, :destroy]
 
   def index
@@ -45,5 +45,9 @@ def update
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.require(:teacher).permit(:employer_id, :hour_value, :certificates)
+    end
+
+    def serializer
+      TeacherSerializer
     end
 end

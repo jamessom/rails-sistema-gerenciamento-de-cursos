@@ -1,4 +1,4 @@
-class Api::V1::GradesController < ApplicationController
+class Api::V1::GradesController < Api::V1::ApiController
   before_action :set_grade, only: [:show, :update, :destroy]
 
   def index
@@ -45,5 +45,9 @@ class Api::V1::GradesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def grade_params
       params.require(:grade).permit(:teacher_id, :course_id, :initial_date, :end_date)
+    end
+
+    def serializer
+      GradeSerializer
     end
 end

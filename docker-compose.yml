@@ -5,6 +5,7 @@ services:
     container_name: scms_database
     image: postgres:9.5-alpine
     ports: [ "15432:5432" ]
+    volumes: [ ".storage:/var/lib/postgresql/data" ]
     networks: [ scms-net ]
     logging:
       driver: "none"
@@ -24,6 +25,7 @@ services:
 
 volumes:
   .gems:
+  .storage:
 
 networks: 
   scms-net:

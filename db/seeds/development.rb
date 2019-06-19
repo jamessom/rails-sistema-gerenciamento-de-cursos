@@ -38,15 +38,6 @@ end
   })
 end
 
-# Enrollments
-(0..5).each do
-  Enrollment.create({
-    date_enrollment: Faker::Time.between(2.days.ago, Time.now, :all),
-    student_id: Student.find(Student.ids.sample).id,
-    grade_id: Grade.find(Grade.ids.sample).id
-  })
-end
-
 # Students
 (0..5).each do
   Student.create({
@@ -55,5 +46,14 @@ end
     email: Faker::Internet.email,
     phone: Faker::PhoneNumber.phone_number,
     date_birth: Faker::Date.birthday(18, 65)
+  })
+end
+
+# Enrollments
+(0..5).each do
+  Enrollment.create({
+    date_enrollment: Faker::Time.between(2.days.ago, Time.now, :all),
+    student_id: Student.find(Student.ids.sample).id,
+    grade_id: Grade.find(Grade.ids.sample).id
   })
 end
