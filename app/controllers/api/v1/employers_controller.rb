@@ -1,4 +1,4 @@
-class Api::V1::EmployersController < ApplicationController
+class Api::V1::EmployersController < Api::V1::ApiController
     before_action :set_employer, only: [:show, :update, :destroy]
   
     def index

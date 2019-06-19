@@ -1,4 +1,4 @@
-class Api::V1::GradesController < ApplicationController
+class Api::V1::GradesController < Api::V1::ApiController
   before_action :set_grade, only: [:show, :update, :destroy]
 
   def index

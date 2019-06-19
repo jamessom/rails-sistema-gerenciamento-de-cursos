@@ -1,4 +1,4 @@
-class Api::V1::StudentsController < ApplicationController
+class Api::V1::StudentsController < Api::V1::ApiController
   before_action :set_student, only: [:show, :update, :destroy]
 
   def index
