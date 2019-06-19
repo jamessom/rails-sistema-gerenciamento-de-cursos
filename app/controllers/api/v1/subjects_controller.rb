@@ -46,4 +46,8 @@ class Api::V1::SubjectsController < Api::V1::ApiController
     def subject_params
       params.require(:subject).permit(:name, :requirement, :price, :workload)
     end
+
+    def serializer
+      SubjectSerializer
+    end
 end

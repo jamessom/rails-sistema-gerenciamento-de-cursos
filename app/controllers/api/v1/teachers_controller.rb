@@ -46,4 +46,8 @@ def update
     def teacher_params
       params.require(:teacher).permit(:employer_id, :hour_value, :certificates)
     end
+
+    def serializer
+      TeacherSerializer
+    end
 end

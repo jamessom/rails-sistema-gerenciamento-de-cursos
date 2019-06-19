@@ -46,4 +46,8 @@ class Api::V1::EnrollmentsController < Api::V1::ApiController
     def enrollment_params
       params.require(:enrollment).permit(:date_enrollment, :student_id, :teacher_id)
     end
+
+    def serializer
+      EnrollmentSerializer
+    end
 end

@@ -46,4 +46,8 @@ class Api::V1::EmployersController < Api::V1::ApiController
       def employer_params
         params.require(:employer).permit(:name, :email, :phone, :date_birth)
       end
+
+      def serializer
+        EmployerSerializer
+      end
   end

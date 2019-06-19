@@ -46,4 +46,8 @@ class Api::V1::GradesController < Api::V1::ApiController
     def grade_params
       params.require(:grade).permit(:teacher_id, :course_id, :initial_date, :end_date)
     end
+
+    def serializer
+      GradeSerializer
+    end
 end
