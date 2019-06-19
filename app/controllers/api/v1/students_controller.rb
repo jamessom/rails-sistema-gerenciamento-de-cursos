@@ -46,4 +46,8 @@ class Api::V1::StudentsController < Api::V1::ApiController
     def student_params
       params.require(:student).permit(:name, :cpf, :email, :phone, :date_birth)
     end
+
+    def serializer
+      StudentsSerializer
+    end
 end
